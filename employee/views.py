@@ -9,32 +9,32 @@ def emp(request):
             try:
                 form.save()
                 return redirect('/show')
-                except:
-                    pass
-        else:
-            form = EmployeeForm()
-            return render(request, 'index.html',{'form': form})
+            except:
+                pass
+    else:
+        form = EmployeeForm()
+    return render(request, 'index.html',{'form': form})
 
-        def show(request):
-            employees = Employee.objects.all()
-            return render(request, "show.html", {'employees': employees}) 
+def show(request):
+    employees = Employee.objects.all()
+    return render(request, "show.html", {'employees': employees}) 
 
-        def edit(request, id):
-            employee = Employee.objects.get(id = id)
-            return render(request, 'edit.html', {'employee': employee})
+def edit(request, id):
+    employee = Employee.objects.get(id = id)
+    return render(request, 'edit.html', {'employee': employee})
 
-        def update(request, id):
-            employee = Employee.ojects.get(id= id)
-            form = EmployeeForm(request.POST, instance = employee)
-            if form.is_valid():
-                form.save()
-                return redirect("/show")
-            return render(request, 'edit.html', {'employee': employee})
+def update(request, id):
+    employee = Employee.ojects.get(id= id)
+    form = EmployeeForm(request.POST, instance = employee)
+    if form.is_valid():
+        form.save()
+        return redirect("/show")
+    return render(request, 'edit.html', {'employee': employee})
 
-        def destroy(request, id):
-            employee = Employee.objects.get(id = id)
-            employee.delete()
-            return redirect('/show')
+def destroy(request, id):
+    employee = Employee.objects.get(id = id)
+    employee.delete()
+    return redirect('/show')
 
 
 
